@@ -21,7 +21,7 @@ public class Disk implements Comparable<Disk> {
         if (getRemainingSpace() >= file.getSize()) {
             files.add(file);
         } else {
-            System.out.println("Not enough space to add file: " + file.getName());
+            System.out.println("Not enough space to add file.");
         }
     }
 
@@ -31,18 +31,11 @@ public class Disk implements Comparable<Disk> {
     }
 
     public static class File {
-        private String name;
         private int size;
 
-        public File(String name, int size) {
-            this.name = name;
+        public File(int size) {
             this.size = size;
         }
-
-        public String getName() {
-            return name;
-        }
-
         public int getSize() {
             return size;
         }
