@@ -38,11 +38,19 @@ public class WorstFit {
             
         }
         System.out.println("Disks req'd= "+ diskList.size());
-        int i = 0;
 
-        while(!diskList.isEmpty()){
+        PriorityQueue<Disk> diskPriorityQueue = new PriorityQueue<>();
 
-            System.out.println(diskList.get(i).getRemainingSpace());
+        for(Disk n: diskList){
+
+            diskPriorityQueue.offer(n);
+        }
+        
+
+        while(!diskPriorityQueue.isEmpty()){
+
+            Disk curreDisk =diskPriorityQueue.poll();
+            System.out.println(curreDisk.getRemainingSpace()+": ");
         }
 
 
