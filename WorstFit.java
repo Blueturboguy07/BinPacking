@@ -27,7 +27,6 @@ public class WorstFit {
 
                 diskList[currentDisk].addFile(n);
             }
-
             
         }
 
