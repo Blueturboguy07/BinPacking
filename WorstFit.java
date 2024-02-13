@@ -4,31 +4,52 @@ import java.util.*;
 public class WorstFit {
 
 
+    @SuppressWarnings("removal")
     public static void main(String args[]) throws FileNotFoundException{
 
-        Scanner input = new Scanner(new File("input100000.txt"));
-        PriorityQueue<Disk.File> fileQueue = new PriorityQueue<Disk.File>();
-
+        Scanner input = new Scanner(new File("input20.txt"));
+        PriorityQueue<Integer> fileQueue = new PriorityQueue<Integer>();
+        Double sumSize =0.0;
         while (input.hasNext()) {
-            fileQueue.offer(new Disk.File(Integer.parseInt(input.nextLine())));
-        }
 
-        Disk[] diskList = new Disk[fileQueue.size()];
+            Integer num = Integer.parseInt(input.nextLine());
+            sumSize+= new Double(num);
+            fileQueue.offer(num);
+        }
+        System.out.println("Total size = "+sumSize/1000000+" GB");
+
+        ArrayList<Disk> diskList = new ArrayList<Disk>();
+        diskList.add(new Disk());
 
         int currentDisk  = 0;
 
-        for(Disk.File n: fileQueue){
+        for(Integer n: fileQueue){
 
-            if(diskList[currentDisk].getRemainingSpace()>= n.getSize()){
+            if(diskList.get(currentDisk).getRemainingSpace()>= n) {
+            
+                diskList.get(currentDisk).addFile(n);
 
-                diskList[currentDisk].addFile(n);
             } else {
                 currentDisk++;
+                diskList.add(new Disk());
 
-                diskList[currentDisk].addFile(n);
+                diskList.get(currentDisk).addFile(n);
             }
             
         }
+        System.out.println("Disks req'd= "+ diskList.size());
+        int i = 0;
+
+        while(!diskList.isEmpty()){
+
+            System.out.println(diskList.get(i).getRemainingSpace());
+        }
+
+
+
+
+
+
 
 
 

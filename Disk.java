@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Disk implements Comparable<Disk> {
-    private static final int DISK_CAPACITY = 1024;
-    private List<File> files;
+    private static final int DISK_CAPACITY = 1000000;
+    private List<Integer> files;
 
     public Disk() {
         this.files = new ArrayList<>();
@@ -11,14 +11,14 @@ public class Disk implements Comparable<Disk> {
 
     public int getRemainingSpace() {
         int usedSpace = 0;
-        for (File file : files) {
-            usedSpace += file.getSize();
+        for (Integer file : files) {
+            usedSpace += file;
         }
         return DISK_CAPACITY - usedSpace;
     }
 
-    public void addFile(File file) {
-        if (getRemainingSpace() >= file.getSize()) {
+    public void addFile(Integer file) {
+        if (getRemainingSpace() >= file) {
             files.add(file);
         } else {
             System.out.println("Not enough space to add file.");
@@ -28,16 +28,5 @@ public class Disk implements Comparable<Disk> {
     @Override
     public int compareTo(Disk otherDisk) {
         return Integer.compare(this.getRemainingSpace(), otherDisk.getRemainingSpace());
-    }
-
-    public static class File {
-        private int size;
-
-        public File(int size) {
-            this.size = size;
-        }
-        public int getSize() {
-            return size;
-        }
     }
 }
