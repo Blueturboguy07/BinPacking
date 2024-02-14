@@ -30,12 +30,15 @@ public class Disk implements Comparable<Disk> {
         return Integer.compare(this.getRemainingSpace(), otherDisk.getRemainingSpace());
     }
 
-    private String toString(){
+    public String toString(){
+
+        String concatenateString = "";
 
         for(Integer n: files){
 
-            System.out.println(n);
+            concatenateString+=" "+n;
         }
+        return concatenateString;
 
     }
 }
