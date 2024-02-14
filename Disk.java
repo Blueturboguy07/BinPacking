@@ -29,4 +29,13 @@ public class Disk implements Comparable<Disk> {
     public int compareTo(Disk otherDisk) {
         return Integer.compare(this.getRemainingSpace(), otherDisk.getRemainingSpace());
     }
+
+    private String toString(){
+
+        for(Integer n: files){
+
+            System.out.println(n);
+        }
+
+    }
 }

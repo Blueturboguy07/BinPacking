@@ -52,6 +52,7 @@ public class WorstFit {
             Disk curreDisk =diskPriorityQueue.poll();
             System.out.println(curreDisk.getRemainingSpace()+": ");
         }
+        
 
 
 
