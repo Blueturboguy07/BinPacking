@@ -8,7 +8,9 @@ public class WorstFit {
     public static void main(String args[]) throws FileNotFoundException{
 
         Scanner input = new Scanner(new File("input20.txt"));
-        PriorityQueue<Integer> fileQueue = new PriorityQueue<Integer>();
+        PriorityQueue<Integer> fileQueue = new PriorityQueue<Integer>(Collections.reverseOrder());
+
+        
         Double sumSize =0.0;
         while (input.hasNext()) {
 
