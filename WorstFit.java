@@ -1,74 +1,49 @@
 import java.io.*;
 import java.util.*;
-
 public class WorstFit {
-
-
-    @SuppressWarnings("removal")
-    public static void main(String args[]) throws FileNotFoundException{
-
+    public static void main(String args[]) throws FileNotFoundException {
         Scanner input = new Scanner(new File("input20.txt"));
-        PriorityQueue<Integer> fileQueue = new PriorityQueue<Integer>(Collections.reverseOrder());
+        PriorityQueue<Integer> fileQueue = new PriorityQueue<>(Collections.reverseOrder());
 
-        
-        Double sumSize =0.0;
+        double sumSize = 0.0;
         while (input.hasNext()) {
-
-            Integer num = Integer.parseInt(input.nextLine());
-            sumSize+= new Double(num);
+            int num = Integer.parseInt(input.nextLine());
+            sumSize += num;
             fileQueue.offer(num);
         }
-        System.out.println("Total size = "+sumSize/1000000+" GB");
+        System.out.println("Total size = " + sumSize / 1000000 + " GB");
 
-        ArrayList<Disk> diskList = new ArrayList<Disk>();
+        List<Disk> diskList = new ArrayList<>();
         diskList.add(new Disk());
 
-        int currentDisk  = 0;
+        while (!fileQueue.isEmpty()) {
+            int currentFile = fileQueue.poll();
+            boolean filePlaced = false;
 
-        for(Integer n: fileQueue){
-
-            if(diskList.get(currentDisk).getRemainingSpace()>= n) {
-            
-                diskList.get(currentDisk).addFile(n);
-
-            } else {
-                currentDisk++;
-                diskList.add(new Disk());
-
-                diskList.get(currentDisk).addFile(n);
+            for (Disk disk : diskList) {
+                if (disk.getRemainingSpace() >= currentFile) {
+                    disk.addFile(currentFile);
+                    filePlaced = true;
+                    break;
+                }
             }
-            
-        }
-        System.out.println("Disks req'd= "+ diskList.size());
 
-        PriorityQueue<Disk> diskPriorityQueue = new PriorityQueue<>();
-
-        for(Disk n: diskList){
-
-            diskPriorityQueue.offer(n);
-        }
-        
-
-        while(!diskPriorityQueue.isEmpty()){
-
-            Disk curreDisk =diskPriorityQueue.poll();
-            System.out.println(curreDisk.getRemainingSpace()+": "+curreDisk);
+            if (!filePlaced) {
+                Disk newDisk = new Disk();
+                newDisk.addFile(currentFile);
+                diskList.add(newDisk);
+            }
         }
 
+        System.out.println("Disks required: " + diskList.size());
 
+        PriorityQueue<Disk> diskPriorityQueue = new PriorityQueue<>(diskList);
 
-
-
-
-
-
-
+        while (!diskPriorityQueue.isEmpty()) {
+            Disk currentDisk = diskPriorityQueue.poll();
+            System.out.println(currentDisk.getRemainingSpace() + ": " + currentDisk);
+        }
 
         input.close();
-
     }
-    
-
-
-
 }
