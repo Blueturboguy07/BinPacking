@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 public class WorstFit {
     public static void main(String args[]) throws FileNotFoundException {
-        Scanner input = new Scanner(new File("input20.txt"));
+        Scanner input = new Scanner(new File("input1000.txt"));
         PriorityQueue<Integer> fileQueue = new PriorityQueue<>(Collections.reverseOrder());
 
         double sumSize = 0.0;
